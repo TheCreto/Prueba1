@@ -16,4 +16,4 @@ factura.anyadirLinea(1, 'Raton USB', 8.43)
 factura.anyadirLinea(2, 'Memoria RAM 2GB', 21.15)
 factura.anyadirLinea(1, 'Altavoces', 12.66)
 
-factura.printeame()
+print(factura)
