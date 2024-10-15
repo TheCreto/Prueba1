@@ -22,57 +22,38 @@ from Persona import Persona
 
 
 class Cuenta:
-    def __init__(self, ctitular, ccantidad=0):
-        titular = 'Error'
-        cantidad = 0
-        if isinstance(ctitular, Persona):
-            titular = ctitular
-        else:
-            print('Error al crear instancia, el titular no es una persona')
-        if ccantidad:
-            try:
-                cantidad = float(ccantidad)
-            except ValueError:
-                print('Error al introducir cantidad')
-
+    def __init__(self, titular, cantidad=0):
+        if not isinstance(titular, Persona) and not isinstance(cantidad, (int, float)):
+            raise ValueError('Error al crear instancia')
         self.titular = titular
         self.cantidad = cantidad
 
-    def gettitular(self):
+    def getTitular(self):
         return self.titular
 
-    def getcantidad(self):
+    def getCantidad(self):
         return self.cantidad
 
-    def settitular(self, ctitular):
-        if isinstance(ctitular, Persona):
-            self.titular = ctitular
-        else:
-            print('Error al cambiar de titular')
+    def setTitular(self, titular):
+        if not isinstance(titular, Persona):
+            raise ValueError('Error al cambiar de titular')
+        self.titular = titular
 
-    def setcantidad(self):
+
+    def setCantidad(self):
         print('Para cambiar la cantidad utilice los métodos ingresar/retirar')
 
-    def ingresar(self, cantidad):
-        ingreso = 0
-        try:
-            ingreso = float(cantidad)
-        except ValueError:
-            print('Error al realizar ingreso')
+    def ingresar(self, ingreso):
+        if not isinstance(ingreso, (int, float)):
+            raise ValueError('Error al realizar ingreso')
+        if ingreso <= 0:
+            raise ValueError('Error al realizar ingreso, introduzca una cantidad positiva')
+        self.cantidad += ingreso
 
-        if ingreso >= 0:
-            self.cantidad += ingreso
-        else:
-            print('Introduzca una cantidad positiva')
+    def retirar(self, retiro):
+        if not isinstance(retiro, (int, float)):
+            raise ValueError('Error al realizar el retiro')
+        if retiro <= 0:
+            raise ValueError('Error al realizar el retiro, introduzca una cantidad positiva.')
+        self.cantidad += -retiro
 
-    def retirar(self, cantidad):
-        retiro = 0
-        try:
-            retiro = float(cantidad)
-        except ValueError:
-            print('Error al realizar ingreso')
-
-        if retiro >= 0:
-            self.cantidad += -retiro
-        else:
-            print('Introduzca una cantidad positiva')

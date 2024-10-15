@@ -19,21 +19,13 @@ Metodos
 
 
 class Cliente:
-    def __init__(self, cnombre, cdireccion, ctelefono):
-        nombre = 'Error'
-        direccion = 'Error'
-        telefono = 'Error'
-
-        try:
-            nombre = str(cnombre)
-            direccion = str(cdireccion)
-            for char in ctelefono:
-                if char != '+' and char != ' ':
-                    int(char)
-            telefono = str(ctelefono)
-
-        except ValueError:
-            print('Error al crear instancia')
+    def __init__(self, nombre, direccion, telefono):
+        if not isinstance(nombre, str):
+            raise ValueError('Error al crear instancia, error al introducir el nombre')
+        elif not isinstance(direccion, str):
+            raise ValueError('Error al crear instancia, error al introducir la direccion')
+        elif not isinstance(telefono, str):
+            raise ValueError('Error al crear instancia, error al introducir telefono')
         self._nombre = nombre
         self._direccion = direccion
         self._telefono = telefono
@@ -48,22 +40,17 @@ class Cliente:
         return self._direccion
 
     def setNombre(self, nombre):
-        try:
-            self._nombre = str(nombre)
-        except ValueError:
-            print('Error al cambiar de nombre')
+        if not isinstance(nombre, str):
+            raise ValueError('Error al cambiar de nombre')       
+        self._nombre = str(nombre)
+
 
     def setTelefono(self, telefono):
-        try:
-            for char in telefono:
-                if (char != '+') and (char != ' '):
-                    int(char)
-            self._telefono = str(telefono)
-        except ValueError:
-            print('Error al cambiar de telefono')
+        if not isinstance(telefono, str):
+            raise ValueError('Error al cambiar de telefono')
+        self._telefono = telefono
 
     def setDireccion(self, direccion):
-        try:
-            self._direccion = str(direccion)
-        except ValueError:
-            print('Error al cambiar de direccion')
+        if not isinstance(direccion, str):
+            raise ValueError('Error al cambiar de direccion')
+        self._direccion = str(direccion)

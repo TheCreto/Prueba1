@@ -19,14 +19,13 @@ Metodos
 
 
 class Linea:
-    def __init__(self, ccantidad, cprecio, cdescripcion):
-        cantidad, precio, descripcion = 0, 0, ''
-        try:
-            cantidad = int(ccantidad)
-            precio = float(cprecio)
-            descripcion = str(cdescripcion)
-        except ValueError:
-            print('Error al crear instancia')
+    def __init__(self, cantidad, precio, descripcion):
+        if not isinstance(cantidad, int):
+            raise ValueError('Error al crear instancia, error al introducir al cantidad')
+        elif not isinstance(precio, (int,float)):
+            raise ValueError('Error al crear instancia, error al fijar el precio')
+        elif not isinstance(descripcion, str):
+            raise ValueError('Error al crear instancia, error de descripcion')
 
         self._cantidad = cantidad
         self._precio = precio
@@ -45,17 +44,18 @@ class Linea:
         return self._descripcion
 
     def setCantidad(self, cantidad):
-        if isinstance(cantidad, int):
-            self._cantidad = int(cantidad)
-        else:
-            print('Error al cambiar la cantidad')
+        if not isinstance(cantidad, int):
+            raise ValueError('Error al cambiar la cantidad')
+        self._cantidad = int(cantidad)
+            
 
     def setPrecio(self, precio):
-        if isinstance(precio, float):
-            self._precio = precio
-        else:
-            print('Error al cambiar de precio')
+        if not isinstance(precio, float):
+            raise ValueError('Error al cambiar de precio')
+        self._precio = precio
+
 
     def setDescripcion(self, descripcion):
-        if isinstance(descripcion, str):
-            self._descripcion =
+        if not isinstance(descripcion, str):
+            raise ValueError('Error al cambiar descripcion')
+        self._descripcion = descripcion
